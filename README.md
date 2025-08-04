@@ -1,5 +1,4 @@
-````markdown
-# 👤 User Account Creator – Bulk User Registration via CSV + API
+# 👤 Enhanced User Account Creation Script
 
 A Python-based utility that reads user account data from a CSV file, validates it, and sends HTTP requests to an API endpoint to create user accounts.
 
@@ -125,13 +124,13 @@ Try users with:
 * No retry logic for failed requests
 * One-by-one user processing (not optimized for speed)
 
-### Future Ideas
+### Suggestions for improving the script
 
-* ✅ Regex-based email validation
-* 🔁 Retry API calls on failure
-* 🧵 Multi-threading or batching
-* 📊 Progress bar for large CSV files
-* ⚙️ Config via `.env` or YAML
+*  Regex-based email validation
+*  Retry API calls on failure
+*  Multi-threading or batching
+*  Progress bar for large CSV files
+*  Config via `.env` or YAML
 
 ---
 
@@ -146,7 +145,7 @@ Try users with:
 
 ---
 
-## 🆘 Troubleshooting
+## 🛠️ Troubleshooting
 
 | Problem                  | Solution                                               |
 | ------------------------ | ------------------------------------------------------ |
@@ -157,11 +156,13 @@ Try users with:
 
 ---
 
-## 📝 License
+## ✅ Final Summary Results:
 
-MIT © 2025 YourNameHere
-
----
-
+Error Logs ← error_log.txt
 ```
+Total rows: 10
+Successfully created: 0          ← Expected (test API)
+Skipped (validation failed): 4   ← Perfect! Caught all bad data
+Failed (API errors): 6           ← Expected (fake API rejecting)
 ```
+
