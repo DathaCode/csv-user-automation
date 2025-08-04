@@ -1,128 +1,167 @@
-User Account Creation Script
-==================================================
-A Python script that creates user accounts from a CSV file by sending requests to an API endpoint. This is my solution to fix the bugs in the original script and add better error handling.
-What Was Wrong With The Original Script
-The original script had several problems:
+````markdown
+# 👤 User Account Creator – Bulk User Registration via CSV + API
 
-No error logging - when something failed, there was no way to know what went wrong
-Missing field handling - if a row had empty email, it would still try to create the user
-Poor error handling - network errors would crash the script
-No validation - didn't check if email format was valid or if roles were correct
+A Python-based utility that reads user account data from a CSV file, validates it, and sends HTTP requests to an API endpoint to create user accounts.
 
-What I Fixed
-1. Added Proper Error Logging
+Designed for **data validation**, **error handling**, and **detailed logging**, this script ensures smooth user creation processes for batch inputs.
 
-Now writes detailed errors to error_log.txt
-Shows which row failed and why
-Includes timestamps for all log entries
+---
 
-2. Data Validation
+## 🚀 Features
 
-Skips rows with missing required fields (name, email, role)
-Basic email validation (checks for @ and . symbols)
-Validates roles against allowed values: admin, user, moderator
+- ✅ **Validation of required fields** (name, email, role)
+- 📧 **Email format checking**
+- 🛡️ **Role verification** (`admin`, `user`, `moderator`)
+- 📊 **Summary report** of created, skipped, and failed entries
+- 🪵 **Detailed logging** to `error_log.txt`
+- 🔄 **Graceful handling** of API/network errors
 
-3. Better Error Handling
+---
 
-Handles network timeouts and connection errors
-Doesn't crash when API returns error codes
-Shows clear error messages
+## 🛠️ How It Works
 
-4. Summary Statistics
+This script reads a CSV file (`users.csv`), validates each row, and sends a `POST` request to an API to create user accounts. Any invalid rows are skipped with logged warnings.
 
-Shows how many users were created successfully
-Counts how many rows were skipped
-Reports any failures
+---
 
-How to Use
-1. Install Requirements
-bashpip install requests
-2. Prepare Your CSV File
-Create a file called users.csv with these columns:
-csvname,email,role
+## 📄 CSV Format
+
+Ensure your `users.csv` includes the following headers:
+
+```csv
+name,email,role
 James Brown,james.brown@example.com,admin
 Harsha Wijeratne,harsha.wijeratne@example.com,moderator
 Lucía Torres,lucia.torres@example,moderator
-3. Run the Script
-bashpython user_creator.py
-4. Check Results
+````
 
-Look at the console output for a summary
-Check error_log.txt for detailed error information
+* **name**: User's full name *(required)*
+* **email**: Must be a valid email format *(required)*
+* **role**: Must be one of `admin`, `user`, or `moderator` *(required)*
 
-CSV File Format
-Your CSV file must have these columns:
+---
 
-name: User's full name (required)
-email: Valid email address (required)
-role: Must be one of: admin, user, moderator (required)
+## 💻 Setup & Usage
 
-Example Output
-When you run the script, you'll see something like this:
-2024-08-03 10:30:15 - INFO - Starting to process file: users.csv
-2024-08-03 10:30:15 - WARNING - Row 3 skipped: Missing email - Data: {'name': 'Bob', 'email': '', 'role': 'user'}
-2024-08-03 10:30:16 - INFO - User created successfully: alice@example.com
-2024-08-03 10:30:16 - ERROR - Row 5 failed: Invalid email format: not-an-email - User: not-an-email
+### 1. Install Dependencies
 
+```bash
+pip install requests
+```
 
+### 2. Place Your CSV File
+
+Place your `users.csv` in the same directory as the script.
+
+### 3. Run the Script
+
+```bash
+python user_creator.py
+```
+
+---
+
+## 📈 Example Output
+
+Console output:
+
+```
+2025-08-03 10:30:15 - INFO - Starting to process file: users.csv
+2025-08-03 10:30:15 - WARNING - Row 3 skipped: Missing email - Data: {'name': 'Bob', 'email': '', 'role': 'user'}
+2025-08-03 10:30:16 - INFO - User created successfully: alice@example.com
+2025-08-03 10:30:16 - ERROR - Row 5 failed: Invalid email format: not-an-email - User: not-an-email
+```
+
+Summary:
+
+```
+==================================================
 PROCESSING COMPLETE
 Total rows: 4
 Successfully created: 2
 Skipped (validation failed): 1
 Failed (API errors): 1
-Configuration
-You can change these settings in the script:
-python# At the bottom of the script
-CSV_FILE = "users.csv"          # Change this to your CSV file name
-API_ENDPOINT = "https://example.com/api/create_user"  # Change to your API URL
-Files Created
+```
 
-error_log.txt - Detailed log of all operations and errors
-Console output - Summary of what happened
+---
 
-Testing
-I've included a sample users.csv file with various test cases:
+## 📁 Files Created
 
-Valid users that should be created
-Users with missing emails (should be skipped)
-Users with invalid email formats (should be skipped)
-Users with invalid roles (should be skipped)
+| File              | Description                         |
+| ----------------- | ----------------------------------- |
+| `users.csv`       | Input CSV containing user data      |
+| `user_creator.py` | The main Python script              |
+| `error_log.txt`   | Error + warning log with timestamps |
 
-Limitations and Future Improvements
-This is a working solution but could be improved:
-Current limitations:
+---
 
-Basic email validation (just checks for @ and .)
-No retry logic if API is temporarily down
-Processes one user at a time (could be slow for large files)
+## ⚙️ Configuration
 
-Possible improvements:
+Change these at the bottom of the script:
 
-Add command line arguments for file paths
-More robust email validation using regex
-Retry failed requests automatically
-Progress bar for large files
-Support for different CSV formats
-Better configuration file instead of hardcoded values
+```python
+CSV_FILE = "users.csv"
+API_ENDPOINT = "https://example.com/api/create_user"
+```
 
-Troubleshooting
+---
 
-"File not found" error:
-Make sure your CSV file is in the same folder as the script
-Check the filename is spelled correctly
+## 🧪 Test Data Suggestions
 
-"CSV missing required columns" error:
-Make sure your CSV has columns named exactly: name, email, role
-Check that the first row contains the column headers
+Try users with:
 
-Network errors:
-Verify the API endpoint URL is correct
-The API server might be down
+* ✅ Valid email/role
+* ❌ Invalid email formats
+* ❌ Invalid roles (e.g., `manager`)
+* ❌ Missing fields (name/email/role)
 
-Code Structure
-The script is organized into these main functions:
+---
 
-setup_logging() - Sets up logging to file and console
-validate_user_data() - Checks if a row has valid data
-create_single_user() - Makes the API request for one user
-create_users() - Main function that processes the entire CSV file
+## ⚠️ Limitations & Improvements
+
+### Current Limitations
+
+* Only basic email validation (`@`, `.` check)
+* No retry logic for failed requests
+* One-by-one user processing (not optimized for speed)
+
+### Future Ideas
+
+* ✅ Regex-based email validation
+* 🔁 Retry API calls on failure
+* 🧵 Multi-threading or batching
+* 📊 Progress bar for large CSV files
+* ⚙️ Config via `.env` or YAML
+
+---
+
+## 🧩 Code Overview
+
+| Function               | Purpose                                          |
+| ---------------------- | ------------------------------------------------ |
+| `setup_logging()`      | Sets up console + file logging                   |
+| `validate_user_data()` | Validates CSV row for required fields and format |
+| `create_single_user()` | Sends API request to create a user               |
+| `create_users()`       | Reads file, processes each user, logs summary    |
+
+---
+
+## 🆘 Troubleshooting
+
+| Problem                  | Solution                                               |
+| ------------------------ | ------------------------------------------------------ |
+| **File not found**       | Ensure `users.csv` exists and is correctly named       |
+| **Missing CSV columns**  | File must have: `name,email,role` as headers           |
+| **Invalid email / role** | Fix CSV values or validate with stricter rules         |
+| **API/network failure**  | Verify endpoint, check network, or log for error codes |
+
+---
+
+## 📝 License
+
+MIT © 2025 YourNameHere
+
+---
+
+```
+```
