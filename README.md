@@ -1,4 +1,3 @@
-````markdown
 # 👤 User Account Creator – Bulk User Registration via CSV + API
 
 A Python-based utility that reads user account data from a CSV file, validates it, and sends HTTP requests to an API endpoint to create user accounts.
@@ -146,7 +145,7 @@ Try users with:
 
 ---
 
-## 🆘 Troubleshooting
+## 🛠️ Troubleshooting
 
 | Problem                  | Solution                                               |
 | ------------------------ | ------------------------------------------------------ |
@@ -155,13 +154,3 @@ Try users with:
 | **Invalid email / role** | Fix CSV values or validate with stricter rules         |
 | **API/network failure**  | Verify endpoint, check network, or log for error codes |
 
----
-
-## 📝 License
-
-MIT © 2025 YourNameHere
-
----
-
-```
-```
