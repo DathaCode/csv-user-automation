@@ -4,7 +4,8 @@ import logging
 import os
 from datetime import datetime
 
-# Configure logging
+# Configure logging to file and console
+# This will log errors to a file and also print them to the console 
 def setup_logging():
     """Setup logging to file and console"""
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
@@ -21,19 +22,19 @@ def setup_logging():
 logger = setup_logging()
 
 def validate_user_data(row):
-    # Checking required fields
+    # Checking required fields and their formats 
     required_fields = ['name', 'email', 'role']
     
     for field in required_fields:
         if not row.get(field) or row.get(field).strip() == '':
             return False, f"Missing {field}"
     
-    # email validation
+    # email validation simple check for '@' and '.' presence
     email = row['email'].strip()
     if '@' not in email or '.' not in email:
         return False, f"Invalid email format: {email}"
     
-    # Check if role is valid (only allow specific roles: admin, user, moderator)
+    # Check if role is valid (only allow specific roles: admin, user, moderator) 
     valid_roles = ['admin', 'user', 'moderator']
     role = row['role'].strip().lower()
     if role not in valid_roles:
@@ -47,7 +48,7 @@ def create_single_user(user_data, api_url):
     Returns: (success, error_message)
     """
     try:
-        # Cleaning data
+        # Cleaning data and removing any spaces
         clean_data = {}
         for key, value in user_data.items():
             if value:
@@ -75,6 +76,7 @@ def create_single_user(user_data, api_url):
     except Exception as e:
         return False, f"Unexpected error: {str(e)}"
 
+# Main function to read CSV and create users
 def create_users(file_path, api_url="https://example.com/api/create_user"):
     """
     Main function to create users from CSV file
@@ -112,7 +114,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
                     logger.warning(f"Row {row_num} skipped: {error_msg} - Data: {row}")
                     continue
                 
-                # Creating user msg
+                # Creating user msg adn alerts
                 success, error_msg = create_single_user(row, api_url)
                 
                 if success:
@@ -125,7 +127,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
         logger.error(f"Error reading CSV file: {e}")
         return
     
-    # Print summary
+    # Final Print summary statistics
     logger.info("="*50)
     logger.info("PROCESSING COMPLETE")
     logger.info(f"Total rows: {total_rows}")
@@ -136,7 +138,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
     if failed > 0 or skipped > 0:
         logger.warning("Some users were not created. Check error_log.txt for details.")
 
-# Main run
+# Main run block
 if __name__ == "__main__":
     ######### Change the CSV file path and API endpoint as needed #########
     CSV_FILE = "users.csv"
