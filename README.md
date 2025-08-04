@@ -1,5 +1,5 @@
 User Account Creation Script
-
+==================================================
 A Python script that creates user accounts from a CSV file by sending requests to an API endpoint. This is my solution to fix the bugs in the original script and add better error handling.
 What Was Wrong With The Original Script
 The original script had several problems:
@@ -63,7 +63,7 @@ When you run the script, you'll see something like this:
 2024-08-03 10:30:15 - WARNING - Row 3 skipped: Missing email - Data: {'name': 'Bob', 'email': '', 'role': 'user'}
 2024-08-03 10:30:16 - INFO - User created successfully: alice@example.com
 2024-08-03 10:30:16 - ERROR - Row 5 failed: Invalid email format: not-an-email - User: not-an-email
-==================================================
+
 
 PROCESSING COMPLETE
 Total rows: 4
