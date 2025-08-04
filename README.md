@@ -154,6 +154,7 @@ Try users with:
 | **Invalid email / role** | Fix CSV values or validate with stricter rules         |
 | **API/network failure**  | Verify endpoint, check network, or log for error codes |
 
+---
 
 ##Final Summary Results:
 
