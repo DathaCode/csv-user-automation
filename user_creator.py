@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Configure logging
 def setup_logging():
-    """Setup basic logging to file and console"""
+    """Setup logging to file and console"""
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
     logging.basicConfig(
         level=logging.INFO,
@@ -21,10 +21,6 @@ def setup_logging():
 logger = setup_logging()
 
 def validate_user_data(row):
-    """
-    Check if user data has required fields
-    Returns: (is_valid, error_message)
-    """
     # Checking required fields
     required_fields = ['name', 'email', 'role']
     
@@ -140,7 +136,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
     if failed > 0 or skipped > 0:
         logger.warning("Some users were not created. Check error_log.txt for details.")
 
-# Main execution
+# Main run
 if __name__ == "__main__":
     ######### Change the CSV file path and API endpoint as needed #########
     CSV_FILE = "users.csv"
