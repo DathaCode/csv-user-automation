@@ -17,7 +17,7 @@ ENV/
 
 # Log files
 *.log
-error_log.txt
+!error_log.txt
 
 # OS files
 .DS_Store
