@@ -1,0 +1,93 @@
+2025-08-04 16:44:10,527 - INFO - Starting to process file: users.csv
+2025-08-04 16:44:31,555 - ERROR - Row 2 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: kamal.perera@example.com
+2025-08-04 16:44:52,487 - ERROR - Row 3 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: emily.watson@example.com
+2025-08-04 16:45:13,406 - ERROR - Row 4 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: carlos.rivera@example.com
+2025-08-04 16:45:13,406 - WARNING - Row 5 skipped: Invalid email format: nadeesha.example.com - Data: {'name': 'Nadeesha Fernando', 'email': 'nadeesha.example.com', 'role': 'user'}
+2025-08-04 16:45:34,364 - ERROR - Row 6 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: sanjeewa.gunasekara@example.com
+2025-08-04 16:45:34,365 - WARNING - Row 7 skipped: Missing email - Data: {'name': 'Oliver Smith', 'email': '', 'role': 'admin'}
+2025-08-04 16:45:34,365 - WARNING - Row 8 skipped: Missing email - Data: {'name': 'Thilini Rajapaksha', 'email': '', 'role': 'user'}
+2025-08-04 16:45:55,321 - ERROR - Row 9 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: isabella.gomez@example.com
+2025-08-04 16:45:55,321 - WARNING - Row 10 skipped: Invalid role: invalid-role - Data: {'name': 'Chathura Jayasuriya', 'email': 'chathura.jayasuriya@example.com', 'role': 'invalid-role'}
+2025-08-04 16:45:56,295 - ERROR - Row 11 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: james.brown@example.com
+2025-08-04 16:45:57,214 - ERROR - Row 12 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: harsha.wijeratne@example.com
+2025-08-04 16:45:58,152 - ERROR - Row 13 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: lucia.torres@example
+2025-08-04 16:45:59,075 - ERROR - Row 14 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: dulani.abeywickrama@example.com
+2025-08-04 16:46:00,036 - ERROR - Row 15 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: ben.thompson@example.com
+2025-08-04 16:46:00,037 - WARNING - Row 16 skipped: Missing email - Data: {'name': 'Roshan Kumara', 'email': '', 'role': 'admin'}
+2025-08-04 16:46:00,956 - ERROR - Row 17 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: sofia.morales@example.com
+2025-08-04 16:46:01,896 - ERROR - Row 18 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: iresha.senanayake@example.com
+2025-08-04 16:46:01,897 - WARNING - Row 19 skipped: Missing name - Data: {'name': '', 'email': 'janith.bandara@example.com', 'role': 'admin'}
+2025-08-04 16:46:01,897 - WARNING - Row 20 skipped: Invalid role: invalid-role - Data: {'name': 'Mateo Delgado', 'email': 'mateo.delgado@example.com', 'role': 'invalid-role'}
+2025-08-04 16:46:02,854 - ERROR - Row 21 failed: API error - Status: 403, Response: <HTML><HEAD>
+<TITLE>Access Denied</TITLE>
+</HEAD><BODY>
+<H1>Access Denied</H1>
+ 
+You don't have perm - User: kasun.rathnayake@example
+2025-08-04 16:46:02,855 - INFO - ==================================================
+2025-08-04 16:46:02,855 - INFO - PROCESSING COMPLETE
+2025-08-04 16:46:02,855 - INFO - Total rows: 20
+2025-08-04 16:46:02,855 - INFO - Successfully created: 0
+2025-08-04 16:46:02,856 - INFO - Skipped (validation failed): 7
+2025-08-04 16:46:02,856 - INFO - Failed (API errors): 13
+2025-08-04 16:46:02,856 - WARNING - Some users were not created. Check error_log.txt for details.

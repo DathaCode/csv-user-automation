@@ -15,10 +15,6 @@ ENV/
 .idea/
 *.swp
 
-# Log files
-*.log
-error_log.txt
-
 # OS files
 .DS_Store
 Thumbs.db
