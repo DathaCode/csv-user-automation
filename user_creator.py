@@ -25,19 +25,19 @@ def validate_user_data(row):
     Check if user data has required fields
     Returns: (is_valid, error_message)
     """
-    # Check for required fields
+    # Checking required fields
     required_fields = ['name', 'email', 'role']
     
     for field in required_fields:
         if not row.get(field) or row.get(field).strip() == '':
             return False, f"Missing {field}"
     
-    # Basic email validation - just check if it has @ and .
+    # email validation
     email = row['email'].strip()
     if '@' not in email or '.' not in email:
         return False, f"Invalid email format: {email}"
     
-    # Check if role is valid
+    # Check if role is valid (only allow specific roles: admin, user, moderator)
     valid_roles = ['admin', 'user', 'moderator']
     role = row['role'].strip().lower()
     if role not in valid_roles:
@@ -51,7 +51,7 @@ def create_single_user(user_data, api_url):
     Returns: (success, error_message)
     """
     try:
-        # Clean up the data
+        # Cleaning data
         clean_data = {}
         for key, value in user_data.items():
             if value:
@@ -99,7 +99,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
         with open(file_path, 'r') as f:
             reader = csv.DictReader(f)
             
-            # Check if CSV has the right columns
+            # Checking CSV columns
             expected_columns = ['name', 'email', 'role']
             if not all(col in reader.fieldnames for col in expected_columns):
                 logger.error(f"CSV missing required columns. Expected: {expected_columns}")
@@ -116,7 +116,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
                     logger.warning(f"Row {row_num} skipped: {error_msg} - Data: {row}")
                     continue
                 
-                # Try to create the user
+                # Creating user msg
                 success, error_msg = create_single_user(row, api_url)
                 
                 if success:
@@ -142,7 +142,7 @@ def create_users(file_path, api_url="https://example.com/api/create_user"):
 
 # Main execution
 if __name__ == "__main__":
-    # You can change these settings here
+    ######### Change the CSV file path and API endpoint as needed #########
     CSV_FILE = "users.csv"
     API_ENDPOINT = "https://example.com/api/create_user"
     

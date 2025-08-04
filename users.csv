@@ -1,0 +1,21 @@
+name,email,role
+Kamal Perera,kamal.perera@example.com,admin
+Emily Watson,emily.watson@example.com,user
+Carlos Rivera,carlos.rivera@example.com,moderator
+Nadeesha Fernando,nadeesha.example.com,user
+Sanjeewa Gunasekara,sanjeewa.gunasekara@example.com,moderator
+Oliver Smith,,admin
+Thilini Rajapaksha,,user
+Isabella Gómez,isabella.gomez@example.com,user
+Chathura Jayasuriya,chathura.jayasuriya@example.com,invalid-role
+James Brown,james.brown@example.com,admin
+Harsha Wijeratne,harsha.wijeratne@example.com,moderator
+Lucía Torres,lucia.torres@example,moderator
+Dulani Abeywickrama,dulani.abeywickrama@example.com,user
+Ben Thompson,ben.thompson@example.com,user
+Roshan Kumara,,admin
+Sofía Morales,sofia.morales@example.com,moderator
+Iresha Senanayake,iresha.senanayake@example.com,user
+,janith.bandara@example.com,admin
+Mateo Delgado,mateo.delgado@example.com,invalid-role
+Kasun Rathnayake,kasun.rathnayake@example,admin
