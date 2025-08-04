@@ -96,7 +96,7 @@ Failed (API errors): 1
 
 ## ⚙️ Configuration
 
-Change these at the bottom of the script:
+Change the CSV file path and API endpoint as needed:
 
 ```python
 CSV_FILE = "users.csv"
