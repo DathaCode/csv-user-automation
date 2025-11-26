@@ -1,168 +1,268 @@
-# 👤 Enhanced User Account Creation Script
+# 🐳 User Creation Script — Batch User Import via CSV (Docker + Python)
 
-A Python-based utility that reads user account data from a CSV file, validates it, and sends HTTP requests to an API endpoint to create user accounts.
+A production-ready, containerized Python tool to **batch-create user accounts** from CSV files via API.
 
-Designed for **data validation**, **error handling**, and **detailed logging**, this script ensures smooth user creation processes for batch inputs.
+Built for **automation**, **stability**, **logging**, **validation**, and **multi-platform deployment**.
 
 ---
 
 ## 🚀 Features
 
-- ✅ **Validation of required fields** (name, email, role)
-- 📧 **Email format checking**
-- 🛡️ **Role verification** (`admin`, `user`, `moderator`)
-- 📊 **Summary report** of created, skipped, and failed entries
-- 🪵 **Detailed logging** to `error_log.txt`
-- 🔄 **Graceful handling** of API/network errors
+- 🐳 **Docker containerized** for consistent deployments  
+- 📂 **Batch user creation** from CSV  
+- 🔍 **Data validation**  
+  - Required fields  
+  - Email format  
+  - Role validation  
+- 📝 **Detailed error + activity logging**  
+- ⏱️ **Timeout, retry, and API error handling**  
+- 📊 **Processing summary & statistics**  
+- 🔒 **Security scanning** with Trivy  
+- 🌍 **Multi-platform builds** (amd64, arm64)  
 
 ---
 
-## 🛠️ How It Works
+## ⚡ Quick Start with Docker
 
-This script reads a CSV file (`users.csv`), validates each row, and sends a `POST` request to an API to create user accounts. Any invalid rows are skipped with logged warnings.
+### 1️⃣ Pull the image
+```bash
+docker pull yourusername/user-creation-script:latest
+```
+
+### 2️⃣ Run the container
+```bash
+docker run --rm \
+  -v $(pwd)/users.csv:/app/data/users.csv:ro \
+  -v $(pwd)/logs:/app/logs \
+  -e API_ENDPOINT=https://your-api.com/create_user \
+  yourusername/user-creation-script:latest
+```
+
+### 3️⃣ Using Docker Compose
+
+Create `.env`:
+```bash
+cp .env.example .env
+```
+
+Run:
+```bash
+docker-compose up
+```
+
+---
+
+## 🛠️ Makefile Commands (Recommended)
+
+```bash
+make help       # Show all commands
+make build      # Build Docker image
+make run        # Run container
+make logs       # View logs
+make pull       # Pull Docker Hub image
+make push       # Push to Docker Hub
+make stop       # Stop running containers
+make clean      # Cleanup containers/images
+```
 
 ---
 
 ## 📄 CSV Format
 
-Ensure your `users.csv` includes the following headers:
+Your CSV **must** contain the following:
 
+| Column | Type   | Required | Valid Values |
+|--------|---------|-----------|--------------|
+| name   | string | Yes       | Non-empty string |
+| email  | string | Yes       | Valid email |
+| role   | string | Yes       | admin, user, moderator |
+
+### Example `users.csv`
 ```csv
 name,email,role
-James Brown,james.brown@example.com,admin
-Harsha Wijeratne,harsha.wijeratne@example.com,moderator
-Lucía Torres,lucia.torres@example,moderator
-````
-
-* **name**: User's full name *(required)*
-* **email**: Must be a valid email format *(required)*
-* **role**: Must be one of `admin`, `user`, or `moderator` *(required)*
+John Doe,john@example.com,admin
+Jane Smith,jane@example.com,user
+Bob Wilson,bob@example.com,moderator
+```
 
 ---
 
-## 💻 Setup & Usage
+## 🧑‍💻 Local Development Setup
 
-### 1. Install Dependencies
+Clone + install dependencies:
+```bash
+git clone https://github.com/yourusername/user-creation-script.git
+cd user-creation-script
+
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+```
+
+Run locally:
+```bash
+python user_creation_script.py
+```
+
+---
+
+## 🧪 Running Tests
 
 ```bash
-pip install requests
+pytest                       # Run all tests
+pytest --cov=. --cov-report=html   # Coverage report
+pytest tests/test_user_creation.py -v
 ```
 
-### 2. Place Your CSV File
+---
 
-Place your `users.csv` in the same directory as the script.
-
-### 3. Run the Script
+## 🔧 Code Quality & Security
 
 ```bash
-python user_creator.py
+make format         # Auto-format with Black
+make lint           # Lint with Flake8
+make security-scan  # Bandit + Safety
 ```
 
 ---
 
-## 📈 Example Output
+## 🌱 Environment Variables
 
-Console output:
+| Variable | Description | Default |
+|----------|-------------|----------|
+| `CSV_FILE` | Path to CSV file | `/app/data/users.csv` |
+| `API_ENDPOINT` | User creation API endpoint | `https://example.com/api/create_user` |
 
-```
-2025-08-03 10:30:15 - INFO - Starting to process file: users.csv
-2025-08-03 10:30:15 - WARNING - Row 3 skipped: Missing email - Data: {'name': 'Bob', 'email': '', 'role': 'user'}
-2025-08-03 10:30:16 - INFO - User created successfully: alice@example.com
-2025-08-03 10:30:16 - ERROR - Row 5 failed: Invalid email format: not-an-email - User: not-an-email
-```
+---
 
-Summary:
+## 🐍 Docker Image Details
 
-```
-==================================================
-PROCESSING COMPLETE
-Total rows: 4
-Successfully created: 2
-Skipped (validation failed): 1
-Failed (API errors): 1
+- **Base Image:** python:3.11-slim  
+- **Optimized multi-stage build**  
+- **Size:** ~150MB  
+- **Platforms:** linux/amd64, linux/arm64  
+- **Runs as:** non-root `appuser`  
+- **Healthcheck:** Enabled  
+
+---
+
+## 🤖 CI/CD Pipeline (GitHub Actions)
+
+Includes automated:
+
+### ✔ Lint & Test  
+- Black  
+- Flake8  
+- Pytest (+ coverage)  
+- Builds on Python 3.9, 3.10, 3.11  
+
+### ✔ Security  
+- Bandit  
+- Safety  
+
+### ✔ Docker Build  
+- Multi-platform build  
+- Trivy vulnerability scanning  
+- Tags: `latest`, semantic versions, commit SHA  
+- Push to Docker Hub  
+
+### ✔ Docker Verification  
+- Pull & run test image  
+- Validate health  
+- Check image size  
+
+---
+
+## 🔐 Setup GitHub Secrets
+
+Add to Repo → Settings → Secrets:
+
+- `DOCKER_USERNAME`
+- `DOCKER_PASSWORD`
+
+Push to start CI/CD deployments:
+```bash
+git add .
+git commit -m "Setup CI/CD"
+git push origin main
 ```
 
 ---
 
-## 📁 Files Created
+## 🐋 Docker Hub Repository
 
-| File              | Description                         |
-| ----------------- | ----------------------------------- |
-| `users.csv`       | Input CSV containing user data      |
-| `user_creator.py` | The main Python script              |
-| `error_log.txt`   | Error + warning log with timestamps |
+Your images will appear at:
 
----
-
-## ⚙️ Configuration
-
-Change the CSV file path and API endpoint as needed:
-
-```python
-CSV_FILE = "users.csv"
-API_ENDPOINT = "https://example.com/api/create_user"
+```
+https://hub.docker.com/r/yourusername/user-creation-script
 ```
 
 ---
 
-## 🧪 Test Data Suggestions
+## ❗ Troubleshooting
 
-Try users with:
-
-* ✅ Valid email/role
-* ❌ Invalid email formats
-* ❌ Invalid roles (e.g., `manager`)
-* ❌ Missing fields (name/email/role)
-
----
-
-## ⚠️ Limitations & Improvements
-
-### Current Limitations
-
-* Only basic email validation (`@`, `.` check)
-* No retry logic for failed requests
-* One-by-one user processing (not optimized for speed)
-
-### Suggestions for improving the script
-
-*  Regex-based email validation
-*  Retry API calls on failure
-*  Multi-threading or batching
-*  Progress bar for large CSV files
-*  Config via `.env` or YAML
-
----
-
-## 🧩 Code Overview
-
-| Function               | Purpose                                          |
-| ---------------------- | ------------------------------------------------ |
-| `setup_logging()`      | Sets up console + file logging                   |
-| `validate_user_data()` | Validates CSV row for required fields and format |
-| `create_single_user()` | Sends API request to create a user               |
-| `create_users()`       | Reads file, processes each user, logs summary    |
-
----
-
-## 🛠️ Troubleshooting
-
-| Problem                  | Solution                                               |
-| ------------------------ | ------------------------------------------------------ |
-| **File not found**       | Ensure `users.csv` exists and is correctly named       |
-| **Missing CSV columns**  | File must have: `name,email,role` as headers           |
-| **Invalid email / role** | Fix CSV values or validate with stricter rules         |
-| **API/network failure**  | Verify endpoint, check network, or log for error codes |
-
----
-
-## ✅ Final Summary Results:
-
-Error Logs ← error_log.txt
+### ❌ Container exits immediately
+```bash
+docker-compose logs
 ```
-Total rows: 10
-Successfully created: 0          ← Expected (test API)
-Skipped (validation failed): 4   ← Perfect! Caught all bad data
-Failed (API errors): 6           ← Expected (fake API rejecting)
+
+### ❌ CSV file not found
+```bash
+ls -la users.csv
 ```
+
+### ❌ Permission denied
+```bash
+chmod 644 users.csv
+```
+
+### ❌ API errors  
+Check connectivity:
+```bash
+curl -X POST https://your-api.com/create_user
+```
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── .github/workflows/ci-cd.yml
+├── tests/
+│   └── test_user_creation.py
+├── Dockerfile
+├── docker-compose.yml
+├── Makefile
+├── .dockerignore
+├── user_creation_script.py
+├── requirements.txt
+├── requirements-dev.txt
+├── pytest.ini
+├── .flake8
+├── setup.py
+├── .env.example
+└── README.md
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo  
+2. Create a branch: `git checkout -b feature/my-feature`  
+3. Commit changes  
+4. Push: `git push origin feature/my-feature`  
+5. Open a Pull Request  
+
+---
+
+## 📜 License
+MIT License
+
+---
+
+## 💬 Support
+
+- GitHub Issues: https://github.com/yourusername/user-creation-script/issues  
+- Docker Hub: https://hub.docker.com/r/yourusername/user-creation-script  
 
