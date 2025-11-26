@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 
 # Configure logging to file and console
+# test CICD integration
 # This will log errors to a file and also print them to the console 
 def setup_logging():
     """Setup logging to file and console"""
